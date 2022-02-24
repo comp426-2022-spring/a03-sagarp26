@@ -20,8 +20,9 @@ app.get("/app/flip/", (req, res) => {
 })
 
 app.get("/app/flips/:number/", (req, res) => {
+  flips = coinFlips(req.params.number)
   res.setHeader("Content-Type", "text/json")
-  res.status(200).json({"raw":coinFlips(req.params.number),"summary":countFlips(flips)})
+  res.status(200).json({"raw":flips,"summary":countFlips(flips)})
 })
 
 app.get("/app/flip/call/heads/", (req, res) => {
@@ -69,7 +70,7 @@ function countFlips(array) {
       y++
     }
   }
-  const result = `{"tails":${y},"heads":${x}}`;
+  const result = {"tails":y,"heads":x};
   return result;
 }
 
