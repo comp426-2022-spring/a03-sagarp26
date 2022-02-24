@@ -19,17 +19,17 @@ app.get("/app/flip/", (req, res) => {
   res.status(200).json({"flip":coinFlip()})
 })
 
-app.get("/app/flips/:number", (req, res) => {
+app.get("/app/flips/:number/", (req, res) => {
   res.setHeader("Content-Type", "text/json")
   res.status(200).json({"raw":coinFlips(req.params.number),"summary":countFlips(flips)})
 })
 
-app.get("/app/flip/call/heads", (req, res) => {
+app.get("/app/flip/call/heads/", (req, res) => {
   res.setHeader("Content-Type", "text/json")
   res.status(200).json(flipACoin("heads"))
 })
 
-app.get("/app/flip/call/tails", (req, res) => {
+app.get("/app/flip/call/tails/", (req, res) => {
   res.setHeader("Content-Type", "text/json")
   res.status(200).json(flipACoin("tails"))
 })
@@ -82,6 +82,6 @@ function flipACoin(c) {
   else {
     r = "lose"
   }
-  const message = `{"call":"${c}", "flip":"${f}", "result":"${r}"}`;
+  const message = {"call":c, "flip":f, "result":r};
   return message;
 }
