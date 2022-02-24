@@ -44,37 +44,37 @@ app.use(function(req, res) {
 })
 
 function coinFlip() {
-  let x = Math.floor(Math.random() * 2);
+  let x = Math.floor(Math.random() * 2)
   var result = ""
   if(x < 1) {
-    result = "heads";
+    result = "heads"
   }
   else {
-    result = "tails";
+    result = "tails"
   }
-  return result;
+  return result
 }
 
 function coinFlips(flips) {
-  const f = [];
+  const f = []
   for (let i = 0; i < flips; i++) {
-    f[i] = coinFlip();
+    f[i] = coinFlip()
   }
-  return f;
+  return f
 }
 
 function countFlips(array) {
-  var x = 0;
-  var y = 0;
+  var x = 0
+  var y = 0
   for(let i = 0; i < array.length; i++) {
     if(array[i] == "heads") {
-      x++;
+      x++
     }
     else if(array[i] == "tails") {
-      y++;
+      y++
     }
   }
-  const result = `{"tails":${y}, "heads":${x}}`;
+  const result = `{"tails":${y},"heads":${x}}`;
   return result;
 }
 
@@ -82,10 +82,10 @@ function flipACoin(c) {
   let f = coinFlip();
   var r = "";
   if(c == f) {
-    r = "win";
+    r = "win"
   }
   else {
-    r = "lose";
+    r = "lose"
   }
   const message = `"call":${c}, "flip":${f}, "result":${r}`;
   return message;
