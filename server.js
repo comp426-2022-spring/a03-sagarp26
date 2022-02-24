@@ -9,38 +9,38 @@ const server = app.listen(port, () => {
   console.log("App listening on port %PORT%".replace("%PORT%", port))
 })
 
-app.use(function(req, res) {
-  res.status(404).send("404 NOT FOUND")
-})
-
 app.get("/app/", (req, res) => {
-  res.type("text/plain")
+  res.setHeader("Content-Type", "text/plain")
   res.status(200).send("200 OK")
 })
 
 app.get("/app/flip/", (req, res) => {
   const flip = coinFlip()
-  res.type("text/json")
+  res.setHeader("Content-Type", "text/json")
   res.status(200).json({"flip":flip})
 })
 
 app.get("/app/flips/:number", (req, res) => {
   const flips = coinFlips(req.params.number)
   const count = countFlips(flips)
-  res.type("text/json")
+  res.setHeader("Content-Type", "text/json")
   res.status(200).json({"raw":flips,"summary":count})
 })
 
 app.get("/app/flip/call/heads", (req, res) => {
   const result = flipACoin("heads")
-  res.type("text/json")
+  res.setHeader("Content-Type", "text/json")
   res.status(200).json({result})
 })
 
 app.get("/app/flip/call/tails", (req, res) => {
   const result = flipACoin("tails")
-  res.type("text/json")
+  res.setHeader("Content-Type", "text/json")
   res.status(200).json({result})
+})
+
+app.use(function(req, res) {
+  res.status(404).send("404 NOT FOUND")
 })
 
 function coinFlip() {
