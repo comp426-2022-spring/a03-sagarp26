@@ -15,28 +15,23 @@ app.get("/app/", (req, res) => {
 })
 
 app.get("/app/flip/", (req, res) => {
-  const flip = coinFlip()
   res.setHeader("Content-Type", "text/json")
-  res.status(200).json({"flip":flip})
+  res.status(200).json({"flip":coinFlip()})
 })
 
 app.get("/app/flips/:number", (req, res) => {
-  const flips = coinFlips(req.params.number)
-  const count = countFlips(flips)
   res.setHeader("Content-Type", "text/json")
-  res.status(200).json({"raw":flips,"summary":count})
+  res.status(200).json({"raw":coinFlips(req.params.number),"summary":countFlips(flips)})
 })
 
 app.get("/app/flip/call/heads", (req, res) => {
-  const result = flipACoin("heads")
   res.setHeader("Content-Type", "text/json")
-  res.status(200).json({result})
+  res.status(200).json(flipACoin("heads"))
 })
 
 app.get("/app/flip/call/tails", (req, res) => {
-  const result = flipACoin("tails")
   res.setHeader("Content-Type", "text/json")
-  res.status(200).json({result})
+  res.status(200).json(flipACoin("tails"))
 })
 
 app.use(function(req, res) {
@@ -87,6 +82,6 @@ function flipACoin(c) {
   else {
     r = "lose"
   }
-  const message = `"call":${c}, "flip":${f}, "result":${r}`;
+  const message = `{"call":"${c}", "flip":"${f}", "result":"${r}"}`;
   return message;
 }
