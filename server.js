@@ -13,18 +13,18 @@ app.use(function(req, res) {
   res.status(404).send("404 NOT FOUND")
 })
 
-app.get("/app", (req, res) => {
+app.get("/app/", (req, res) => {
   res.type("text/plain")
   res.status(200).send("200 OK")
 })
 
-app.get("/app/flip", (req, res) => {
+app.get("/app/flip/", (req, res) => {
   const flip = coinFlip()
   res.type("text/json")
   res.status(200).json({"flip":flip})
 })
 
-app.get("/app/flip/:number", (req, res) => {
+app.get("/app/flips/:number", (req, res) => {
   const flips = coinFlips(req.params.number)
   const count = countFlips(flips)
   res.type("text/json")
